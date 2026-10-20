@@ -1,11 +1,11 @@
 /* function validate()will validate form data */
 function validate() {
-	var sid = document.getElementById("sid").value;
-	var pwd1 = document.getElementById("pwd1").value;
-	var pwd2 = document.getElementById("pwd2").value;
-	var uname = document.getElementById("uname").value;
-	var genm = document.getElementById("genm").checked;
-	var genf = document.getElementById("genf").checked;
+	var sid = $("#sid").val();
+	var pwd1 = $("#pwd1").val();
+	var pwd2 = $("#pwd2").val();
+	var uname = $("#uname").val();
+	var genm = $("#genm").prop("checked");
+	var genf = $("#genf").prop("checked");
 
 	var errMsg = "";								/* create variable to store the error message */
 	var result = true;								/* assumes no errors */
@@ -24,7 +24,7 @@ function validate() {
 	if (uname == "") {								//check whether User Name is empty
 		errMsg += "User name cannot be empty.\n";
 	}
-	if ((genm == "")&&(genf == "")) {				//check whether gender is selected
+	if ((!genm)&&(!genf)) {				//check whether gender is selected
 		errMsg += "A gender must be selected.\n";
 	}
 	
@@ -57,11 +57,10 @@ function validate() {
 /* link HTML elements to corresponding event function */
 function init () {
 	/* assign the <form> element to variable regForm */
-	var regForm = document.getElementById("regform");
+	$("#regform").submit(validate);
 
 	/* link function validate() to the onsubmit event of the form */
-	regForm.onsubmit = validate;
 }
 
 /* execute function init() once the window is loaded*/
-window.onload = init;
+$(document).ready(init);
